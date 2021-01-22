@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="YSprojeModelStoreContainer" CdmEntityContainer="YSprojeEntities">
+    <EntitySetMapping Name="tblDurumlar">
+      <EntityTypeMapping TypeName="YSprojeModel.tblDurumlar">
+        <MappingFragment StoreEntitySet="tblDurumlar">
+          <ScalarProperty Name="DurumID" ColumnName="DurumID" />
+          <ScalarProperty Name="DurumAd" ColumnName="DurumAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblGorevDurum">
+      <EntityTypeMapping TypeName="YSprojeModel.tblGorevDurum">
+        <MappingFragment StoreEntitySet="tblGorevDurum">
+          <ScalarProperty Name="GorevDurumID" ColumnName="GorevDurumID" />
+          <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+          <ScalarProperty Name="ProjeID" ColumnName="ProjeID" />
+          <ScalarProperty Name="GorevID" ColumnName="GorevID" />
+          <ScalarProperty Name="DurumID" ColumnName="DurumID" />
+          <ScalarProperty Name="GorevDurumAciklama" ColumnName="GorevDurumAciklama" />
+          <ScalarProperty Name="GorevDurumTarih" ColumnName="GorevDurumTarih" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblGorevler">
+      <EntityTypeMapping TypeName="YSprojeModel.tblGorevler">
+        <MappingFragment StoreEntitySet="tblGorevler">
+          <ScalarProperty Name="GorevID" ColumnName="GorevID" />
+          <ScalarProperty Name="GorevAd" ColumnName="GorevAd" />
+          <ScalarProperty Name="GorevAciklama" ColumnName="GorevAciklama" />
+          <ScalarProperty Name="GorevNotlar" ColumnName="GorevNotlar" />
+          <ScalarProperty Name="GorevTarihi" ColumnName="GorevTarihi" />
+          <ScalarProperty Name="GorevTahBitis" ColumnName="GorevTahBitis" />
+          <ScalarProperty Name="GorevBitisTar" ColumnName="GorevBitisTar" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblKisiler">
+      <EntityTypeMapping TypeName="YSprojeModel.tblKisiler">
+        <MappingFragment StoreEntitySet="tblKisiler">
+          <ScalarProperty Name="Ort_Bitirme_Gün" ColumnName="Ort_Bitirme_Gün" />
+          <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+          <ScalarProperty Name="KisiAdSoyad" ColumnName="KisiAdSoyad" />
+          <ScalarProperty Name="KisiGorev" ColumnName="KisiGorev" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblKullanicilar">
+      <EntityTypeMapping TypeName="YSprojeModel.tblKullanicilar">
+        <MappingFragment StoreEntitySet="tblKullanicilar">
+          <ScalarProperty Name="KulID" ColumnName="KulID" />
+          <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+          <ScalarProperty Name="KulAd" ColumnName="KulAd" />
+          <ScalarProperty Name="Parola" ColumnName="Parola" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjeler">
+      <EntityTypeMapping TypeName="YSprojeModel.tblProjeler">
+        <MappingFragment StoreEntitySet="tblProjeler">
+          <ScalarProperty Name="ProjeNo" ColumnName="ProjeNo" />
+          <ScalarProperty Name="ProjeAd" ColumnName="ProjeAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="view_GorevDurumDetay">
+      <EntityTypeMapping TypeName="YSprojeModel.view_GorevDurumDetay">
+        <MappingFragment StoreEntitySet="view_GorevDurumDetay">
+          <ScalarProperty Name="ProjeID" ColumnName="ProjeID" />
+          <ScalarProperty Name="GorevID" ColumnName="GorevID" />
+          <ScalarProperty Name="GorevDurumID" ColumnName="GorevDurumID" />
+          <ScalarProperty Name="DurumID" ColumnName="DurumID" />
+          <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+          <ScalarProperty Name="GorevDurumAciklama" ColumnName="GorevDurumAciklama" />
+          <ScalarProperty Name="GorevAd" ColumnName="GorevAd" />
+          <ScalarProperty Name="DurumAd" ColumnName="DurumAd" />
+          <ScalarProperty Name="GorevDurumTarih" ColumnName="GorevDurumTarih" />
+          <ScalarProperty Name="KisiAdSoyad" ColumnName="KisiAdSoyad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="f_TeknikKartDetay" FunctionName="YSprojeModel.Store.f_TeknikKartDetay">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="YSprojeModel.f_TeknikKartDetay_Result">
+          <ScalarProperty Name="KisiAdSoyad" ColumnName="KisiAdSoyad" />
+          <ScalarProperty Name="GorevDurumTarih" ColumnName="GorevDurumTarih" />
+          <ScalarProperty Name="DurumAd" ColumnName="DurumAd" />
+          <ScalarProperty Name="GorevAd" ColumnName="GorevAd" />
+          <ScalarProperty Name="GorevDurumAciklama" ColumnName="GorevDurumAciklama" />
+          <ScalarProperty Name="Ort_Bitirme_Gün" ColumnName="Ort_Bitirme_Gün" />
+          <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+          <ScalarProperty Name="DurumID" ColumnName="DurumID" />
+          <ScalarProperty Name="GorevDurumID" ColumnName="GorevDurumID" />
+          <ScalarProperty Name="GorevID" ColumnName="GorevID" />
+          <ScalarProperty Name="ProjeID" ColumnName="ProjeID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_GorevEkle" FunctionName="YSprojeModel.Store.sp_GorevEkle" />
+    <EntitySetMapping Name="view_Genel">
+      <EntityTypeMapping TypeName="YSprojeModel.view_Genel">
+        <MappingFragment StoreEntitySet="view_Genel">
+          <ScalarProperty Name="GorevBitisTar" ColumnName="GorevBitisTar" />
+          <ScalarProperty Name="GorevTahBitis" ColumnName="GorevTahBitis" />
+          <ScalarProperty Name="GorevTarihi" ColumnName="GorevTarihi" />
+          <ScalarProperty Name="GorevNotlar" ColumnName="GorevNotlar" />
+          <ScalarProperty Name="GorevAciklama" ColumnName="GorevAciklama" />
+          <ScalarProperty Name="GorevAd" ColumnName="GorevAd" />
+          <ScalarProperty Name="GorevID" ColumnName="GorevID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Check">
+      <EntityTypeMapping TypeName="YSprojeModel.vw_Check">
+        <MappingFragment StoreEntitySet="vw_Check">
+          <ScalarProperty Name="GorevAd" ColumnName="GorevAd" />
+          <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Done">
+      <EntityTypeMapping TypeName="YSprojeModel.vw_Done">
+        <MappingFragment StoreEntitySet="vw_Done">
+          <ScalarProperty Name="GorevAd" ColumnName="GorevAd" />
+          <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_inProgress">
+      <EntityTypeMapping TypeName="YSprojeModel.vw_inProgress">
+        <MappingFragment StoreEntitySet="vw_inProgress">
+          <ScalarProperty Name="GorevAd" ColumnName="GorevAd" />
+          <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Revision">
+      <EntityTypeMapping TypeName="YSprojeModel.vw_Revision">
+        <MappingFragment StoreEntitySet="vw_Revision">
+          <ScalarProperty Name="GorevAd" ColumnName="GorevAd" />
+          <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_Todo">
+      <EntityTypeMapping TypeName="YSprojeModel.vw_Todo">
+        <MappingFragment StoreEntitySet="vw_Todo">
+          <ScalarProperty Name="GorevAd" ColumnName="GorevAd" />
+          <ScalarProperty Name="AdSoyad" ColumnName="AdSoyad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

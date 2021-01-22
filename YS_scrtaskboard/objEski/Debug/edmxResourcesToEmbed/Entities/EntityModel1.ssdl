@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="YSprojeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblDurumlar">
+    <Key>
+      <PropertyRef Name="DurumID" />
+    </Key>
+    <Property Name="DurumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DurumAd" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblGorevDurum">
+    <Key>
+      <PropertyRef Name="GorevDurumID" />
+    </Key>
+    <Property Name="GorevDurumID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KisiID" Type="int" Nullable="false" />
+    <Property Name="ProjeID" Type="int" Nullable="false" />
+    <Property Name="GorevID" Type="int" Nullable="false" />
+    <Property Name="DurumID" Type="int" Nullable="false" />
+    <Property Name="GorevDurumAciklama" Type="nvarchar" MaxLength="2500" />
+    <Property Name="GorevDurumTarih" Type="date" />
+  </EntityType>
+  <EntityType Name="tblGorevler">
+    <Key>
+      <PropertyRef Name="GorevID" />
+    </Key>
+    <Property Name="GorevID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GorevAd" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="GorevAciklama" Type="nvarchar" MaxLength="2500" />
+    <Property Name="GorevNotlar" Type="nvarchar" MaxLength="2500" />
+    <Property Name="GorevTarihi" Type="date" />
+    <Property Name="GorevTahBitis" Type="date" />
+    <Property Name="GorevBitisTar" Type="date" />
+  </EntityType>
+  <EntityType Name="tblKisiler">
+    <Key>
+      <PropertyRef Name="KisiID" />
+    </Key>
+    <Property Name="KisiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KisiAdSoyad" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="KisiGorev" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tblKullanicilar">
+    <Key>
+      <PropertyRef Name="KulID" />
+    </Key>
+    <Property Name="KulID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KisiID" Type="int" Nullable="false" />
+    <Property Name="KulAd" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Parola" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblProjeler">
+    <Key>
+      <PropertyRef Name="ProjeNo" />
+    </Key>
+    <Property Name="ProjeNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjeAd" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblGorevDurum_tblDurumlar">
+    <End Role="tblDurumlar" Type="Self.tblDurumlar" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDurumlar">
+        <PropertyRef Name="DurumID" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="DurumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGorevDurum_tblGorevler">
+    <End Role="tblGorevler" Type="Self.tblGorevler" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGorevler">
+        <PropertyRef Name="GorevID" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="GorevID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGorevDurum_tblKisiler">
+    <End Role="tblKisiler" Type="Self.tblKisiler" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKisiler">
+        <PropertyRef Name="KisiID" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGorevDurum_tblProjeler">
+    <End Role="tblProjeler" Type="Self.tblProjeler" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProjeler">
+        <PropertyRef Name="ProjeNo" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="ProjeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblKullanicilar_tblKisiler">
+    <End Role="tblKisiler" Type="Self.tblKisiler" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblKullanicilar" Type="Self.tblKullanicilar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKisiler">
+        <PropertyRef Name="KisiID" />
+      </Principal>
+      <Dependent Role="tblKullanicilar">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="YSprojeModelStoreContainer">
+    <EntitySet Name="tblDurumlar" EntityType="Self.tblDurumlar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblGorevDurum" EntityType="Self.tblGorevDurum" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblGorevler" EntityType="Self.tblGorevler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblKisiler" EntityType="Self.tblKisiler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblKullanicilar" EntityType="Self.tblKullanicilar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjeler" EntityType="Self.tblProjeler" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblGorevDurum_tblDurumlar" Association="Self.FK_tblGorevDurum_tblDurumlar">
+      <End Role="tblDurumlar" EntitySet="tblDurumlar" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGorevDurum_tblGorevler" Association="Self.FK_tblGorevDurum_tblGorevler">
+      <End Role="tblGorevler" EntitySet="tblGorevler" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGorevDurum_tblKisiler" Association="Self.FK_tblGorevDurum_tblKisiler">
+      <End Role="tblKisiler" EntitySet="tblKisiler" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGorevDurum_tblProjeler" Association="Self.FK_tblGorevDurum_tblProjeler">
+      <End Role="tblProjeler" EntitySet="tblProjeler" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblKullanicilar_tblKisiler" Association="Self.FK_tblKullanicilar_tblKisiler">
+      <End Role="tblKisiler" EntitySet="tblKisiler" />
+      <End Role="tblKullanicilar" EntitySet="tblKullanicilar" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

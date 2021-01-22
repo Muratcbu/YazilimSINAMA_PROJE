@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="YSprojeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblDurumlar">
+    <Key>
+      <PropertyRef Name="DurumID" />
+    </Key>
+    <Property Name="DurumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DurumAd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblGorevDurum" Relationship="Self.FK_tblGorevDurum_tblDurumlar" FromRole="tblDurumlar" ToRole="tblGorevDurum" />
+  </EntityType>
+  <EntityType Name="tblGorevDurum">
+    <Key>
+      <PropertyRef Name="GorevDurumID" />
+    </Key>
+    <Property Name="GorevDurumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KisiID" Type="Int32" Nullable="false" />
+    <Property Name="ProjeID" Type="Int32" Nullable="false" />
+    <Property Name="GorevID" Type="Int32" Nullable="false" />
+    <Property Name="DurumID" Type="Int32" Nullable="false" />
+    <Property Name="GorevDurumAciklama" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <Property Name="GorevDurumTarih" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tblDurumlar" Relationship="Self.FK_tblGorevDurum_tblDurumlar" FromRole="tblGorevDurum" ToRole="tblDurumlar" />
+    <NavigationProperty Name="tblGorevler" Relationship="Self.FK_tblGorevDurum_tblGorevler" FromRole="tblGorevDurum" ToRole="tblGorevler" />
+    <NavigationProperty Name="tblKisiler" Relationship="Self.FK_tblGorevDurum_tblKisiler" FromRole="tblGorevDurum" ToRole="tblKisiler" />
+    <NavigationProperty Name="tblProjeler" Relationship="Self.FK_tblGorevDurum_tblProjeler" FromRole="tblGorevDurum" ToRole="tblProjeler" />
+  </EntityType>
+  <EntityType Name="tblGorevler">
+    <Key>
+      <PropertyRef Name="GorevID" />
+    </Key>
+    <Property Name="GorevID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GorevAd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GorevAciklama" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <Property Name="GorevNotlar" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <Property Name="GorevTarihi" Type="DateTime" Precision="0" />
+    <Property Name="GorevTahBitis" Type="DateTime" Precision="0" />
+    <Property Name="GorevBitisTar" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tblGorevDurum" Relationship="Self.FK_tblGorevDurum_tblGorevler" FromRole="tblGorevler" ToRole="tblGorevDurum" />
+  </EntityType>
+  <EntityType Name="tblKisiler">
+    <Key>
+      <PropertyRef Name="KisiID" />
+    </Key>
+    <Property Name="KisiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KisiAdSoyad" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="KisiGorev" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblGorevDurum" Relationship="Self.FK_tblGorevDurum_tblKisiler" FromRole="tblKisiler" ToRole="tblGorevDurum" />
+    <NavigationProperty Name="tblKullanicilar" Relationship="Self.FK_tblKullanicilar_tblKisiler" FromRole="tblKisiler" ToRole="tblKullanicilar" />
+    <Property Name="Ort_Bitirme_Gün" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblKullanicilar">
+    <Key>
+      <PropertyRef Name="KulID" />
+    </Key>
+    <Property Name="KulID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KisiID" Type="Int32" Nullable="false" />
+    <Property Name="KulAd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Parola" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblKisiler" Relationship="Self.FK_tblKullanicilar_tblKisiler" FromRole="tblKullanicilar" ToRole="tblKisiler" />
+  </EntityType>
+  <EntityType Name="tblProjeler">
+    <Key>
+      <PropertyRef Name="ProjeNo" />
+    </Key>
+    <Property Name="ProjeNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjeAd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblGorevDurum" Relationship="Self.FK_tblGorevDurum_tblProjeler" FromRole="tblProjeler" ToRole="tblGorevDurum" />
+  </EntityType>
+  <Association Name="FK_tblGorevDurum_tblDurumlar">
+    <End Role="tblDurumlar" Type="Self.tblDurumlar" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDurumlar">
+        <PropertyRef Name="DurumID" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="DurumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGorevDurum_tblGorevler">
+    <End Role="tblGorevler" Type="Self.tblGorevler" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGorevler">
+        <PropertyRef Name="GorevID" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="GorevID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGorevDurum_tblKisiler">
+    <End Role="tblKisiler" Type="Self.tblKisiler" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKisiler">
+        <PropertyRef Name="KisiID" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGorevDurum_tblProjeler">
+    <End Role="tblProjeler" Type="Self.tblProjeler" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProjeler">
+        <PropertyRef Name="ProjeNo" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="ProjeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblKullanicilar_tblKisiler">
+    <End Role="tblKisiler" Type="Self.tblKisiler" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblKullanicilar" Type="Self.tblKullanicilar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKisiler">
+        <PropertyRef Name="KisiID" />
+      </Principal>
+      <Dependent Role="tblKullanicilar">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="YSprojeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblDurumlar" EntityType="Self.tblDurumlar" />
+    <EntitySet Name="tblGorevDurum" EntityType="Self.tblGorevDurum" />
+    <EntitySet Name="tblGorevler" EntityType="Self.tblGorevler" />
+    <EntitySet Name="tblKisiler" EntityType="Self.tblKisiler" />
+    <EntitySet Name="tblKullanicilar" EntityType="Self.tblKullanicilar" />
+    <EntitySet Name="tblProjeler" EntityType="Self.tblProjeler" />
+    <AssociationSet Name="FK_tblGorevDurum_tblDurumlar" Association="Self.FK_tblGorevDurum_tblDurumlar">
+      <End Role="tblDurumlar" EntitySet="tblDurumlar" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGorevDurum_tblGorevler" Association="Self.FK_tblGorevDurum_tblGorevler">
+      <End Role="tblGorevler" EntitySet="tblGorevler" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGorevDurum_tblKisiler" Association="Self.FK_tblGorevDurum_tblKisiler">
+      <End Role="tblKisiler" EntitySet="tblKisiler" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGorevDurum_tblProjeler" Association="Self.FK_tblGorevDurum_tblProjeler">
+      <End Role="tblProjeler" EntitySet="tblProjeler" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblKullanicilar_tblKisiler" Association="Self.FK_tblKullanicilar_tblKisiler">
+      <End Role="tblKisiler" EntitySet="tblKisiler" />
+      <End Role="tblKullanicilar" EntitySet="tblKullanicilar" />
+    </AssociationSet>
+    <EntitySet Name="view_GorevDurumDetay" EntityType="YSprojeModel.view_GorevDurumDetay" />
+    <FunctionImport Name="f_TeknikKartDetay" IsComposable="true" ReturnType="Collection(YSprojeModel.f_TeknikKartDetay_Result)">
+      <Parameter Name="ProjeNo" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_GorevEkle">
+      <Parameter Name="ProjID" Mode="In" Type="Int32" />
+      <Parameter Name="KisiID" Mode="In" Type="Int32" />
+      <Parameter Name="KartTarih" Mode="In" Type="DateTime" />
+      <Parameter Name="Tahmin" Mode="In" Type="DateTime" />
+      <Parameter Name="GercekBitis" Mode="In" Type="DateTime" />
+      <Parameter Name="GorevAd" Mode="In" Type="String" />
+      <Parameter Name="GorevAciklama" Mode="In" Type="String" />
+      <Parameter Name="GorevNotlar" Mode="In" Type="String" />
+      <Parameter Name="KartNo" Mode="InOut" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="view_Genel" EntityType="YSprojeModel.view_Genel" />
+    <EntitySet Name="vw_Check" EntityType="YSprojeModel.vw_Check" />
+    <EntitySet Name="vw_Done" EntityType="YSprojeModel.vw_Done" />
+    <EntitySet Name="vw_inProgress" EntityType="YSprojeModel.vw_inProgress" />
+    <EntitySet Name="vw_Revision" EntityType="YSprojeModel.vw_Revision" />
+    <EntitySet Name="vw_Todo" EntityType="YSprojeModel.vw_Todo" />
+  </EntityContainer>
+  <EntityType Name="view_GorevDurumDetay">
+    <Key>
+      <PropertyRef Name="KisiAdSoyad" />
+      <PropertyRef Name="DurumAd" />
+      <PropertyRef Name="GorevAd" />
+      <PropertyRef Name="KisiID" />
+      <PropertyRef Name="DurumID" />
+      <PropertyRef Name="GorevDurumID" />
+      <PropertyRef Name="GorevID" />
+      <PropertyRef Name="ProjeID" />
+    </Key>
+    <Property Name="KisiAdSoyad" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GorevDurumTarih" Type="DateTime" Precision="0" />
+    <Property Name="DurumAd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GorevAd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GorevDurumAciklama" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <Property Name="KisiID" Type="Int32" Nullable="false" />
+    <Property Name="DurumID" Type="Int32" Nullable="false" />
+    <Property Name="GorevDurumID" Type="Int32" Nullable="false" />
+    <Property Name="GorevID" Type="Int32" Nullable="false" />
+    <Property Name="ProjeID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <ComplexType Name="f_TeknikKartDetay_Result">
+    <Property Type="String" Name="KisiAdSoyad" Nullable="false" MaxLength="200" />
+    <Property Type="DateTime" Name="GorevDurumTarih" Nullable="true" Precision="10" />
+    <Property Type="String" Name="DurumAd" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="GorevAd" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="GorevDurumAciklama" Nullable="true" MaxLength="2500" />
+    <Property Type="Int32" Name="Ort_Bitirme_Gün" Nullable="true" />
+    <Property Type="Int32" Name="KisiID" Nullable="false" />
+    <Property Type="Int32" Name="DurumID" Nullable="false" />
+    <Property Type="Int32" Name="GorevDurumID" Nullable="false" />
+    <Property Type="Int32" Name="GorevID" Nullable="false" />
+    <Property Type="Int32" Name="ProjeID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="view_Genel">
+    <Key>
+      <PropertyRef Name="GorevID" />
+      <PropertyRef Name="GorevAd" />
+    </Key>
+    <Property Name="GorevID" Type="Int32" Nullable="false" />
+    <Property Name="GorevAd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GorevAciklama" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <Property Name="GorevNotlar" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <Property Name="GorevTarihi" Type="DateTime" Precision="0" />
+    <Property Name="GorevTahBitis" Type="DateTime" Precision="0" />
+    <Property Name="GorevBitisTar" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="vw_Check">
+    <Key>
+      <PropertyRef Name="AdSoyad" />
+      <PropertyRef Name="GorevAd" />
+    </Key>
+    <Property Name="AdSoyad" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GorevAd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_Done">
+    <Key>
+      <PropertyRef Name="AdSoyad" />
+      <PropertyRef Name="GorevAd" />
+    </Key>
+    <Property Name="AdSoyad" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GorevAd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_inProgress">
+    <Key>
+      <PropertyRef Name="AdSoyad" />
+      <PropertyRef Name="GorevAd" />
+    </Key>
+    <Property Name="AdSoyad" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GorevAd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_Revision">
+    <Key>
+      <PropertyRef Name="AdSoyad" />
+      <PropertyRef Name="GorevAd" />
+    </Key>
+    <Property Name="AdSoyad" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GorevAd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="vw_Todo">
+    <Key>
+      <PropertyRef Name="AdSoyad" />
+      <PropertyRef Name="GorevAd" />
+    </Key>
+    <Property Name="AdSoyad" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GorevAd" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

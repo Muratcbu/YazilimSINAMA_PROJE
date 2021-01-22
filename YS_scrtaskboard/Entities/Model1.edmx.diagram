@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="afbcb76cb85d4e2c976509ae1790e73a" Name="Diagram1">
+        <EntityTypeShape EntityType="YSprojeModel.tblDurumlar" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="YSprojeModel.tblGorevDurum" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="YSprojeModel.tblGorevler" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="YSprojeModel.tblKisiler" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="YSprojeModel.tblKullanicilar" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="YSprojeModel.tblProjeler" Width="1.5" PointX="0.75" PointY="12" IsExpanded="true" />
+        <AssociationConnector Association="YSprojeModel.FK_tblGorevDurum_tblDurumlar" ManuallyRouted="false" />
+        <AssociationConnector Association="YSprojeModel.FK_tblGorevDurum_tblGorevler" ManuallyRouted="false" />
+        <AssociationConnector Association="YSprojeModel.FK_tblGorevDurum_tblKisiler" ManuallyRouted="false" />
+        <AssociationConnector Association="YSprojeModel.FK_tblGorevDurum_tblProjeler" ManuallyRouted="false" />
+        <AssociationConnector Association="YSprojeModel.FK_tblKullanicilar_tblKisiler" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="YSprojeModel.view_GorevDurumDetay" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="YSprojeModel.view_Genel" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="YSprojeModel.vw_Check" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="YSprojeModel.vw_Done" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="YSprojeModel.vw_inProgress" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="YSprojeModel.vw_Revision" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="YSprojeModel.vw_Todo" Width="1.5" PointX="9.375" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

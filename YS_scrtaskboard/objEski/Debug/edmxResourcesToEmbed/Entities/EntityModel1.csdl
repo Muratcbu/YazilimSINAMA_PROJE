@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="YSprojeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblDurumlar">
+    <Key>
+      <PropertyRef Name="DurumID" />
+    </Key>
+    <Property Name="DurumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DurumAd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblGorevDurum" Relationship="Self.FK_tblGorevDurum_tblDurumlar" FromRole="tblDurumlar" ToRole="tblGorevDurum" />
+  </EntityType>
+  <EntityType Name="tblGorevDurum">
+    <Key>
+      <PropertyRef Name="GorevDurumID" />
+    </Key>
+    <Property Name="GorevDurumID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KisiID" Type="Int32" Nullable="false" />
+    <Property Name="ProjeID" Type="Int32" Nullable="false" />
+    <Property Name="GorevID" Type="Int32" Nullable="false" />
+    <Property Name="DurumID" Type="Int32" Nullable="false" />
+    <Property Name="Aciklama" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <Property Name="GorevDurumTarih" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tblDurumlar" Relationship="Self.FK_tblGorevDurum_tblDurumlar" FromRole="tblGorevDurum" ToRole="tblDurumlar" />
+    <NavigationProperty Name="tblGorevler" Relationship="Self.FK_tblGorevDurum_tblGorevler" FromRole="tblGorevDurum" ToRole="tblGorevler" />
+    <NavigationProperty Name="tblKisiler" Relationship="Self.FK_tblGorevDurum_tblKisiler" FromRole="tblGorevDurum" ToRole="tblKisiler" />
+    <NavigationProperty Name="tblProjeler" Relationship="Self.FK_tblGorevDurum_tblProjeler" FromRole="tblGorevDurum" ToRole="tblProjeler" />
+    <Property Name="GorevDurumAciklama" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblProjeler1" Relationship="YSprojeModel.FK_tblGorevDurum_tblProjeler1" FromRole="tblGorevDurum" ToRole="tblProjeler" />
+  </EntityType>
+  <EntityType Name="tblGorevler">
+    <Key>
+      <PropertyRef Name="GorevID" />
+    </Key>
+    <Property Name="GorevID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GorevAd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GorevAciklama" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <Property Name="GorevNotlar" Type="String" MaxLength="2500" FixedLength="false" Unicode="true" />
+    <Property Name="GörevTarihi" Type="DateTime" Precision="0" />
+    <Property Name="GorevTahBitis" Type="DateTime" Precision="0" />
+    <Property Name="GorevBitisTar" Type="DateTime" Precision="0" />
+    <Property Name="GorevDurumID" Type="Int32" />
+    <NavigationProperty Name="tblGorevDurum" Relationship="Self.FK_tblGorevDurum_tblGorevler" FromRole="tblGorevler" ToRole="tblGorevDurum" />
+    <Property Name="GorevTarihi" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblKisiler">
+    <Key>
+      <PropertyRef Name="KisiID" />
+    </Key>
+    <Property Name="KisiID" Type="Int32" Nullable="false" />
+    <Property Name="KisiAdSoyad" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="KisiGorev" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblGorevDurum" Relationship="Self.FK_tblGorevDurum_tblKisiler" FromRole="tblKisiler" ToRole="tblGorevDurum" />
+    <NavigationProperty Name="tblKullanicilar" Relationship="Self.FK_tblKullanicilar_tblKisiler" FromRole="tblKisiler" ToRole="tblKullanicilar" />
+  </EntityType>
+  <EntityType Name="tblKullanicilar">
+    <Key>
+      <PropertyRef Name="KulID" />
+    </Key>
+    <Property Name="KulID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KisiID" Type="Int32" Nullable="false" />
+    <Property Name="KulAd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Parola" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblKisiler" Relationship="Self.FK_tblKullanicilar_tblKisiler" FromRole="tblKullanicilar" ToRole="tblKisiler" />
+  </EntityType>
+  <EntityType Name="tblProjeler">
+    <Key>
+      <PropertyRef Name="ProjeID" />
+      <PropertyRef Name="ProjeNo" />
+    </Key>
+    <Property Name="ProjeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjeAd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblGorevDurum" Relationship="Self.FK_tblGorevDurum_tblProjeler" FromRole="tblProjeler" ToRole="tblGorevDurum" />
+    <Property Name="ProjeNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="tblGorevDurum1" Relationship="YSprojeModel.FK_tblGorevDurum_tblProjeler1" FromRole="tblProjeler" ToRole="tblGorevDurum" />
+  </EntityType>
+  <Association Name="FK_tblGorevDurum_tblDurumlar">
+    <End Role="tblDurumlar" Type="Self.tblDurumlar" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDurumlar">
+        <PropertyRef Name="DurumID" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="DurumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGorevDurum_tblGorevler">
+    <End Role="tblGorevler" Type="Self.tblGorevler" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGorevler">
+        <PropertyRef Name="GorevID" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="GorevID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGorevDurum_tblKisiler">
+    <End Role="tblKisiler" Type="Self.tblKisiler" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKisiler">
+        <PropertyRef Name="KisiID" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblGorevDurum_tblProjeler">
+    <End Role="tblProjeler" Type="Self.tblProjeler" Multiplicity="1" />
+    <End Role="tblGorevDurum" Type="Self.tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProjeler">
+        <PropertyRef Name="ProjeID" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="ProjeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblKullanicilar_tblKisiler">
+    <End Role="tblKisiler" Type="Self.tblKisiler" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="tblKullanicilar" Type="Self.tblKullanicilar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKisiler">
+        <PropertyRef Name="KisiID" />
+      </Principal>
+      <Dependent Role="tblKullanicilar">
+        <PropertyRef Name="KisiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="YSprojeEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblDurumlar" EntityType="Self.tblDurumlar" />
+    <EntitySet Name="tblGorevDurum" EntityType="Self.tblGorevDurum" />
+    <EntitySet Name="tblGorevler" EntityType="Self.tblGorevler" />
+    <EntitySet Name="tblKisiler" EntityType="Self.tblKisiler" />
+    <EntitySet Name="tblKullanicilar" EntityType="Self.tblKullanicilar" />
+    <EntitySet Name="tblProjeler" EntityType="Self.tblProjeler" />
+    <AssociationSet Name="FK_tblGorevDurum_tblDurumlar" Association="Self.FK_tblGorevDurum_tblDurumlar">
+      <End Role="tblDurumlar" EntitySet="tblDurumlar" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGorevDurum_tblGorevler" Association="Self.FK_tblGorevDurum_tblGorevler">
+      <End Role="tblGorevler" EntitySet="tblGorevler" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGorevDurum_tblKisiler" Association="Self.FK_tblGorevDurum_tblKisiler">
+      <End Role="tblKisiler" EntitySet="tblKisiler" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGorevDurum_tblProjeler" Association="Self.FK_tblGorevDurum_tblProjeler">
+      <End Role="tblProjeler" EntitySet="tblProjeler" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblKullanicilar_tblKisiler" Association="Self.FK_tblKullanicilar_tblKisiler">
+      <End Role="tblKisiler" EntitySet="tblKisiler" />
+      <End Role="tblKullanicilar" EntitySet="tblKullanicilar" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblGorevDurum_tblProjeler1" Association="YSprojeModel.FK_tblGorevDurum_tblProjeler1">
+      <End Role="tblProjeler" EntitySet="tblProjeler" />
+      <End Role="tblGorevDurum" EntitySet="tblGorevDurum" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_tblGorevDurum_tblProjeler1">
+    <End Type="YSprojeModel.tblProjeler" Role="tblProjeler" Multiplicity="1" />
+    <End Type="YSprojeModel.tblGorevDurum" Role="tblGorevDurum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblProjeler">
+        <PropertyRef Name="ProjeNo" />
+      </Principal>
+      <Dependent Role="tblGorevDurum">
+        <PropertyRef Name="ProjeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
